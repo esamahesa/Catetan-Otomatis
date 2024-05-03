@@ -35,19 +35,20 @@ function validateAmount(string){
 function convertInput(input, bankWD){
     const stringPool = input.split(', ');
     const firstSentence = `MASUK DANA KE **${stringPool[0]}** => **${validateAmount(stringPool[1])}**;`;
-    const secondSentence = `KIRIM KE **${stringPool[2].toUpperCase()} WD ROMA ${bankWD[stringPool[2].toUpperCase()].nama}**`;
+    const secondSentence = `KIRIM DANA KE ${stringPool[2].toUpperCase()} WD ROMA ${bankWD[stringPool[2].toUpperCase()].nama}`;
     const lastSentence = `${bankWD[stringPool[2].toUpperCase()].noRek}`;
-    return [firstSentence, secondSentence, '```', lastSentence, '```'];
+    return [firstSentence, '```', secondSentence, '```', '```', lastSentence, '```'];
 };
 
 function funcClick(){
     const resultSection = document.querySelector('.result-section');
     const convertingInput = convertInput(input.value, bankWD);
+    console.log(convertingInput)
     if(resultSection.style.display === '') resultSection.style.display = 'block';
 
     let textCopy = '';
     for(let i = 0; i < convertingInput.length; i++){
-        if(resultSection.children.length < 6){
+        if(resultSection.children.length < convertingInput.length){
             const elementP = document.createElement('p');
     
             resultSection.appendChild(elementP);
